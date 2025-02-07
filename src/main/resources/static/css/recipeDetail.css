@@ -1,0 +1,214 @@
+img {
+    justify-self: center;
+    min-width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.content {
+    max-width: 70%;
+    margin: 0px auto 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Top h2 {
+    text-align: center;
+    margin: 10px 0px 20px 0px;
+    color: #333;
+}
+
+li {
+    list-style: none;
+}
+
+.list li {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 0px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.list li span {
+    width: 300px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.list li span:nth-child(1) {
+    font-weight: 600;
+}
+
+.list li span:nth-child(2) {
+    flex: 1;
+}
+
+
+.list li span:nth-child(3) {
+    width: 100px;
+    justify-self: center;
+}
+
+.memo {
+    word-break: break-word;
+}
+
+
+/* コメント */
+#comment {
+    width: 70%;
+    margin: 0px auto 50px auto;
+    padding: 10px;
+}
+
+.oneComment {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.commentList {
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.commentList>img {
+    margin-right: 20px;
+}
+
+.commentText {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    align-self: flex-start;
+}
+
+.commentUser {
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: #1010102d 1px solid;
+}
+
+.commentUser>a {
+    text-decoration: none;
+    display: inline-block;
+    margin-left: auto;
+    background-color: #fdfdfd;
+    color: #333;
+    padding: 3px;
+}
+
+.commentUser>a:hover {
+    color: #777;
+}
+
+.commentmain {
+    margin-top: 10px;
+}
+
+.border {
+    margin: 10px auto 50px auto;
+    width: 100%;
+    height: 5px;
+    border-bottom: 1px solid #1010102d;
+}
+
+/* コメント投稿フォーム */
+#commentForm {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#commentForm h5 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+#commentForm textarea {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#commentForm button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #101010d3;
+    color: #fcfcfc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#commentForm button:hover {
+    background-color: #333;
+}
+
+@media (max-width:700px) {
+
+    body {
+        width: 90%;
+    }
+
+    .content {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .list li span:nth-child(1) {
+        font-weight: 600;
+        width: 100px;
+    }
+
+    .list li span:nth-child(3) {
+        width: 25px;
+    }
+
+    .list li span {
+        width: 300px;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    #comment {
+        width: 100%;
+    }
+
+    .commentList>img {
+        min-width: 50px;
+        height: 50px;
+        margin-right: 20px;
+    }
+
+    .commentUser>a {
+        font-size: 14px;
+    }
+
+    .commentList {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+    }
+
+}

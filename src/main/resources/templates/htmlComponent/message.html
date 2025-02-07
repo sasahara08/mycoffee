@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/header.css">
+  <title>ホーム - BrewShare</title>
+</head>
+
+<body>
+  <div th:fragment="message">
+    <div th:if="${message}" class="messageBox">
+      <span th:text="${message}"></span>
+    </div>
+
+    <style>
+      .messageBox {
+        width: 40%;
+        max-width: 400px;
+        position: fixed;
+        top: 0%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #cda16f;
+        z-index: 10;
+        opacity: 0;
+        border-radius: 2px;
+        animation: messageView 2.5s ease-in-out;
+      }
+
+      .messageBox>span {
+        display: block;
+        text-align: center;
+        padding: 10px 15px;
+        color: #fcfcfc;
+        font-size: 25px;
+      }
+
+      @keyframes messageView {
+        0% {
+          opacity: 1;
+        }
+
+        60% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+        }
+
+      }
+
+      @media (max-width:700px) {
+
+        .messageBox>span {
+          font-size: 14px;
+          padding: 8px;
+        }
+
+        .messageBox {
+          width: 60%;
+        }
+      }
+    </style>
+  </div>
+
+</body>
+
+</html>

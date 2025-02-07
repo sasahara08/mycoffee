@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Potta+One&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="/css/body.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/updataPw.css">
+  <title>パスワード再設定 - BrewShare</title>
+</head>
+
+<body>
+
+  <!-- 遷移時メッセージ -->
+  <div th:replace="~{/htmlComponent/message :: message}"></div>
+
+  <!-- headerを挿入 -->
+  <header th:replace="~{/htmlComponent/header :: header}"></header>
+
+  <main>
+
+    <h2>パスワード再設定</h2>
+    <div class="border"></div>
+
+    <form class="form_body" enctype="multipart/form-data" th:action="@{/updataPw}" th:object="${updataPwForm}"
+      method="post">
+
+      <div class="form_box">
+        <label for="beforePw">現在のパスワード</label>
+        <span>必須</span>
+        <div th:if="${#fields.hasErrors('beforePw')}" th:errors="*{beforePw}"></div>
+        <input type="password" th:field="*{beforePw}">
+      </div>
+
+      <div class="form_box">
+        <label for="afterPw">新しいパスワード</label>
+        <span>必須</span>
+        <div th:if="${#fields.hasErrors('afterPw')}" th:errors="*{afterPw}"></div>
+        <input type="password" th:field="*{afterPw}">
+      </div>
+
+      <div class="form_box">
+        <label for="afterPwConfirmation">新しいパスワード(確認用)</label>
+        <span>必須</span>
+        <div th:if="${#fields.hasErrors('afterPwConfirmation')}" th:errors="*{afterPwConfirmation}"></div>
+        <input type="password" th:field="*{afterPwConfirmation}">
+      </div>
+
+      <div class="form_box">
+        <button type="submit">登録</button>
+      </div>
+
+
+    </form>
+
+
+
+  </main>
+
+</body>
+
+</html>

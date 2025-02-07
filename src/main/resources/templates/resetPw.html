@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+  <link rel="stylesheet" href="/css/body.css">
+  <link rel="stylesheet" href="/css/resetPw.css">
+  <title>パスワード再設定 - Share Brew</title>
+</head>
+
+<body>
+
+  <a th:href="@{/}">
+    <h1>Share Brew</h1>
+  </a>
+  
+  <main>
+    <div class="container">
+      <h2>パスワード再設定メールを送る</h2>
+      <div class="border"></div>
+
+      <form th:action="@{/resetPw}" method="post">
+        <div class="label">
+          <p th:if="${message}" th:text="${message}" style="color: tomato;"></p>
+          <label for="email">メールアドレス</label>
+          <input type="text" name="email" id="email">
+          <span>入力したメールアドレス宛に仮パスワードを送信します。</span>
+        </div>
+        <button type="submit">送信</button>
+      </form>
+    </div>
+
+  </main>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+  <link rel="stylesheet" href="/css/body.css">
+  <link rel="stylesheet" href="/css/loginForm.css">
+  <title>ログイン - Share Brew</title>
+</head>
+
+<body>
+  <div class="loginPage">
+
+    <!-- <div class="loginImg">
+      <img src="/img/login_page.png" alt="ログインページ写真">
+    </div> -->
+
+    <div class="loginForm">
+
+      <div class="info">
+
+        <h1>Share Brew</h1>
+
+        <div th:if="${authSuccessMessage}">
+          <p th:text="${authSuccessMessage}"></p>
+        </div>
+
+        <div>
+          <p th:if="${message}" th:text="${message}"></p>
+        </div>
+
+        <div th:if="${param.loggedOut}">
+          <p>ログアウトしました</p>
+        </div>
+
+        <div th:if="${param.error}">
+          <p>メールアドレスまたはパスワードが正しくありません。</p>
+        </div>
+
+        <div th:if="${resetPwMessage}">
+          <p th:text="${resetPwMessage}"></p>
+        </div>
+
+      </div>
+
+      <form class="formBody" th:action="@{/login}" method="post">
+
+        <input type="text" name="username" id="username" autocomplete="email" placeholder=" e-mail" autofocus>
+
+        <input type="password" name="password" id="password" autocomplete="current-password" placeholder=" パスワード" value="Password">
+
+        <a th:href="@{/resetPw}">パスワードを忘れた方はこちら</a>
+
+        <button type="submit">login</button>
+
+      </form>
+
+      <form method="get" th:action="@{/signup}" class="newUserForm">
+        <div class="border"></div>
+        <button class="createUser" type="submit">新規登録</button>
+      </form>
+
+    </div>
+  </div>
+</body>
+
+</html>

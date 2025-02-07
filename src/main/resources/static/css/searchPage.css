@@ -1,0 +1,19 @@
+h2 {
+    width: 70%;
+    margin: 50px auto;
+    padding-bottom: 30px;
+    text-align: left;
+    border-bottom: #1010102d 1px solid;
+}
+
+@media (max-width:700px) {
+    body {
+        width: 90%;
+    }
+
+    h2 {
+        width: 90%;
+        font-size: 18px;
+        padding-bottom: 10px;
+    }
+}

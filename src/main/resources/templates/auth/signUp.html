@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+  <link rel="stylesheet" href="/css/body.css">
+  <link rel="stylesheet" href="/css/signup.css">
+  <title>ログイン/MyCoffee</title>
+</head>
+
+<body>
+  <div class="signUp">
+
+
+    <a th:href="@{/}">
+      <h1>Share Brew</h1>
+    </a>
+
+    <div class="formheader">
+      <h2>新規登録</h2>
+      <div class="border"></div>
+    </div>
+
+    <form class="formBody" enctype="multipart/form-data" th:action="@{/signup}" th:object="${signupForm}" method="post">
+
+      <div class="formBox">
+
+
+        <label for="img">アイコンを設定</label>
+
+        <!-- ユーザーアイコンをプレビュー -->
+        <div class="previewImg">
+          <img src="/img/default_icon.jpg" id="preview" style="display: none; max-width: 40%;" alt="">
+        </div>
+
+        <input style="margin-top: 6px;" th:field="*{img}" id="input_img" type="file" accept="image/jpeg, image/png">
+
+
+      </div>
+
+      <div class="formBox">
+        <label for="name">ユーザー名</label>
+        <span>必須</span>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        <input type="text" th:field="*{name}" autocomplete="name" autofocus>
+      </div>
+
+      <div class="formBox">
+        <label for="email">メールアドレス</label>
+        <span>必須</span>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <input type="text" th:field="*{email}" autocomplete="email" placeholder="半角大文字、小文字を１文字ずつ含めてください">
+      </div>
+
+      <div class="formBox">
+        <label for="password">パスワード</label>
+        <span>必須</span>
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <input type="password" th:field="*{password}" autocomplete="new-password">
+      </div>
+
+      <div class="formBox">
+        <label for="passwordConfirmation">パスワード(確認用)</label>
+        <span>必須</span>
+        <div th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></div>
+        <input type="password" th:field="*{passwordConfirmation}" autocomplete="current-password">
+      </div>
+
+      <button type="submit">登録</button>
+
+    </form>
+
+
+  </div>
+  <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+  <script src="/js/img_preview.js"></script>
+</body>
+
+</html>

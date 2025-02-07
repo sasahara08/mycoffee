@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Potta+One&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" th:href="@{/css/body.css}">
+  <link rel="stylesheet" th:href="@{/css/header.css}">
+  <link rel="stylesheet" th:href="@{/css/createdRecipe.css}">
+  <title>レシピ登録 - BrewShare</title>
+</head>
+
+<body>
+
+  <!-- 遷移時メッセージ -->
+  <div th:replace="~{/htmlComponent/message :: message}"></div>
+
+  <!-- headerを挿入 -->
+  <header th:replace="~{/htmlComponent/header :: header}"></header>
+
+  <main>
+    <h2>レシピ登録</h2>
+    <div class="border"></div>
+
+    <form method="post" th:action="@{/createRecipe}" th:object="${recipeForm}">
+
+      <div class="recipeLabel">
+        <label for="name">豆の種類 [必須]</label>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        <input type="text" th:field="*{name}" placeholder="例) ブルーマウンテン">
+      </div>
+
+      <div class="recipeLabel">
+        <label for="roast">焙煎度</label>
+        <div th:if="${#fields.hasErrors('roast')}" th:errors="*{roast}"></div>
+        <input th:field="*{roast}" id="roastInput" list="roast" placeholder="例) 深煎り">
+        <datalist id="roast">
+          <option value=""></option>
+          <option value="浅煎り" data-id="data1-id1"></option>
+          <option value="中煎り" data-id="data1-id2"></option>
+          <option value="深煎り" data-id="data1-id3"></option>
+        </datalist>
+      </div>
+
+      <div class="recipeLabel">
+        <label for="grindSize">粗度</label>
+        <div th:if="${#fields.hasErrors('grindSize')}" th:errors="*{grindSize}"></div>
+        <input th:field="*{grindSize}" id="grindSizeInput" list="grindSize" placeholder="例) 中挽き">
+        <datalist id="grindSize">
+          <option value=""></option>
+          <option value="細挽き" data-id="data1-id1"></option>
+          <option value="中細挽き" data-id="data1-id2"></option>
+          <option value="中挽き" data-id="data1-id3"></option>
+          <option value="粗挽き" data-id="data1-id4"></option>
+        </datalist>
+      </div>
+
+      <div class="recipeLabel">
+        <label for="beanWeight">豆の重さ ( g )</label>
+        <div th:if="${#fields.hasErrors('beanWeight')}" th:errors="*{beanWeight}"></div>
+        <input type="number" step="0.1" th:field="*{beanWeight}" placeholder="例) 10g" min="0">
+      </div>
+
+      <div class="recipeLabel">
+        <label for="waterValue">水の量 ( ml )</label>
+        <div th:if="${#fields.hasErrors('waterValue')}" th:errors="*{waterValue}"></div>
+        <input type="number" step="1" th:field="*{waterValue}" placeholder="例) 150ml" min="0">
+      </div>
+
+      <div class="recipeLabel">
+        <label for="waterTemp">水の温度 ( ℃ )</label>
+        <div th:if="${#fields.hasErrors('waterTemp')}" th:errors="*{waterTemp}"></div>
+        <input type="number" step="1" th:field="*{waterTemp}" placeholder="例) 90℃" min="0">
+      </div>
+
+      <div class="recipeLabel">
+        <label for="steamingTime">蒸らし時間 ( 秒 )</label>
+        <div th:if="${#fields.hasErrors('steamingTime')}" th:errors="*{steamingTime}"></div>
+        <input type="number" step="1" th:field="*{steamingTime}" placeholder="例) 30秒" min="0">
+      </div>
+
+      <div class="recipeLabel">
+        <label for="doripper">ドリッパー</label>
+        <div th:if="${#fields.hasErrors('doripper')}" th:errors="*{doripper}"></div>
+        <input type="text" th:field="*{doripper}" placeholder="例) HARIO V60">
+      </div>
+
+      <div class="recipeLabel">
+        <label for="filter">フィルター</label>
+        <div th:if="${#fields.hasErrors('filter')}" th:errors="*{filter}"></div>
+        <input type="text" th:field="*{filter}" placeholder="例) ペーパー/ネル/ステン">
+      </div>
+
+      <div class="recipeLabel">
+        <label for="memo">メモ</label>
+        <div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}"></div>
+        <textarea th:field="*{memo}" placeholder="その他説明を記載"></textarea>
+      </div>
+
+      <button type="submit">レシピを保存</button>
+
+    </form>
+
+  </main>
+</body>
+
+</html>

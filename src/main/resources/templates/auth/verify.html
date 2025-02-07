@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/body.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <title>ログイン/MyCoffee</title>
+</head>
+
+<body>
+  <!DOCTYPE html>
+  <html xmlns:th="https://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>メール認証</title>
+  </head>
+
+  <body>
+    <header>
+      <a th:href="@{/}">投稿アプリ</a>
+    </header>
+
+    <main>
+      <p th:text="${successMessage}"></p>
+    </main>
+
+  </body>
+
+  </html>
+</body>
+
+</html>

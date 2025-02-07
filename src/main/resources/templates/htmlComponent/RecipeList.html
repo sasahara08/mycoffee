@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" th:content="${_csrf.token}" />
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+  <link rel="stylesheet" href="css/header.css">
+  <title>ホーム - BrewShare</title>
+</head>
+
+<body>
+
+  <div class="menuList" th:fragment="recipeList">
+    <ul>
+      <div:block th:each="rl:${recipeList}" class="listpackage">
+
+        <li>
+          <div class="listHeader">
+
+            <div class="listBox listIcon">
+              <img th:src="@{/user_icon/{img}(img=${rl.user.img})}" alt="ユーザーアイコン">
+            </div>
+
+            <div class="listBox listName">
+              <span th:text="${rl.user.name}"></span>
+            </div>
+
+            <!-- ブックマーク表示切替 -->
+            <div class="listBox bookmarkIcon" th:if="${!rl.isSameUser}">
+              <form class="bookmark" id="fov_${rl.id}" th:if="${!rl.isSameUser}"
+                th:action="@{/Favorite/{rlId}(rlId=${rl.id})}" method="get" recipeData="${rl.id}">
+                <button type="submit">
+                  <span class="material-symbols-outlined" th:style="${rl.isFav ? 'color: tomato;' : 'color: #5f6368;'}">
+                    bookmark
+                  </span>
+                </button>
+              </form>
+            </div>
+
+            <!-- コメントの通知 -->
+            <div class="listBox notification" th:if="${rl.isSameUser}">
+
+              <a th:href="@{/RecipeDetails/{rlId}(rlId = ${rl.id})}">
+                <span class="material-symbols-outlined" th:if="${rl.isSameUser && !rl.isView}"
+                  style="color:#5f6368;">chat_bubble</span>
+              </a>
+
+              <a th:href="@{/RecipeDetails/{rlId}(rlId = ${rl.id})}">
+                <span class="material-symbols-outlined" th:if="${rl.isSameUser && rl.isView}"
+                  style="color: tomato;">mark_chat_unread</span>
+              </a>
+            </div>
+
+          </div>
+
+          <div class="content">
+
+            <div class="info">
+
+              <div class="listBox">
+
+                <div class="IconAndName">
+                  <span class="material-symbols-outlined">
+                    coffee
+                  </span>
+                  <span>豆の名前</span>
+                </div>
+                <span th:text="${rl.bean.name} ?: '未入力'"></span>
+
+              </div>
+
+              <div class="listBox">
+                <div class="IconAndName">
+                  <span class="material-symbols-outlined">
+                    scale
+                  </span>
+                  <span>豆の量</span>
+                </div>
+                <span th:text="${rl.beansWeight != null ? rl.beansWeight + 'g' : '未入力'}"></span>
+              </div>
+
+              <div class="listBox">
+                <div class="IconAndName">
+                  <span class="material-symbols-outlined">
+                    water_drop
+                  </span>
+                  <span>水の量</span>
+                </div>
+                <span th:text="${rl.waterVolume != null ? rl.waterVolume + 'ml' : '未入力'}"></span>
+              </div>
+
+              <div class="listBox">
+                <div class="IconAndName">
+                  <span class="material-symbols-outlined">
+                    device_thermostat
+                  </span>
+                  <span>水温</span>
+                </div>
+                <span th:text="${rl.waterTemp != null ? rl.waterTemp + '℃' : '未入力'}"></span>
+              </div>
+
+            </div>
+
+            <div class="edit">
+
+              <div class="listBox">
+                <span th:if="${rl.isSameUser}" class="material-symbols-outlined">
+                  edit_square
+                </span>
+                <a th:if="${rl.isSameUser}" th:href="@{/edit/{rlId}/{userId}(rlId = ${rl.id}, userId = ${rl.user.id})}">
+                  <input type="button" value="編集">
+                </a>
+              </div>
+
+              <div class="listBox">
+                <span th:if="${rl.isSameUser}" class="material-symbols-outlined">
+                  delete
+                </span>
+                <a th:if="${rl.isSameUser}"
+                  th:href="@{/delete/{rlId}/{userId}(rlId = ${rl.id}, userId = ${rl.user.id})}">
+                  <input type="button" id="delete" value="削除">
+                </a>
+              </div>
+
+              <!-- レシピの詳細表示ボタン -->
+              <div class="listBox">
+                <span class="material-symbols-outlined">
+                  menu_book
+                </span>
+                <a th:href="@{/RecipeDetails/{rlId}(rlId = ${rl.id})}">
+                  <input type="button" id="RecipeDetail" value="レシピ詳細">
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+
+        </li>
+
+      </div:block>
+    </ul>
+
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/js/fav.js}"></script>
+
+    <script>
+      $("#delete").click(function () {
+        if (!confirm("レシピを削除してもよろしいですか？")) {
+          return false;
+        } else {
+          return true;
+        }
+      })
+    </script>
+  </div>
+
+  </main>
+
+</body>
+
+</html>
