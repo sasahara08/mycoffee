@@ -61,7 +61,9 @@ public class RecipeService {
   }
 
   // ランダムで１０件レシピを取得
-  public 
+  public List<Recipe> getRandomRecipe(){
+    return recipeRepository.getRandomRecipe();
+  }
 
   // レシピを作成したユーザーとログインしているユーザーが同じかチェック
   public boolean checkUser(User user, UserDetailsImpl userDetailsImpl) {

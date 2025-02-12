@@ -20,13 +20,13 @@
           </a>
         </li>
 
-        <li class="headerSearch">
+        <li class="headerSearch" sec:authorize="isAuthenticated()">
           <form type="search" method="get" th:action="@{/search}">
             <input class="searchBar" type="text" name="beanSearch" placeholder=" 豆の種類で他のレシピを検索" required>
           </form>
         </li>
 
-        <li class="userIcon">
+        <li class="userIcon" sec:authorize="isAuthenticated()">
           <img th:src="@{/user_icon/{img}(img=${user.img})}" alt="ユーザーアイコン">
           <div class="sub_menu">
             <ul>
@@ -63,13 +63,17 @@
           </div>
         </li>
 
-        <li class="addRecipe">
+        <li class="addRecipe" sec:authorize="isAuthenticated()">
           <a th:href="@{/createRecipe}" class="registRecipe">
             <span class="material-symbols-outlined">
               edit_square
             </span>
             <span>レシピ追加</span>
           </a>
+        </li>
+
+        <li sec:authorize="isAnonymous()">
+          <a class="registRecipe" th:href="@{/login}">ログイン</a>
         </li>
 
       </ul>

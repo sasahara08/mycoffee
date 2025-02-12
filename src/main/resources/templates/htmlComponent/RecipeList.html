@@ -28,7 +28,7 @@
             </div>
 
             <!-- ブックマーク表示切替 -->
-            <div class="listBox bookmarkIcon" th:if="${!rl.isSameUser}">
+            <div class="listBox bookmarkIcon" th:if="${!rl.isSameUser}" sec:authorize="isAuthenticated()">
               <form class="bookmark" id="fov_${rl.id}" th:if="${!rl.isSameUser}"
                 th:action="@{/Favorite/{rlId}(rlId=${rl.id})}" method="get" recipeData="${rl.id}">
                 <button type="submit">
@@ -40,7 +40,7 @@
             </div>
 
             <!-- コメントの通知 -->
-            <div class="listBox notification" th:if="${rl.isSameUser}">
+            <div class="listBox notification" th:if="${rl.isSameUser}" sec:authorize="isAuthenticated()">
 
               <a th:href="@{/RecipeDetails/{rlId}(rlId = ${rl.id})}">
                 <span class="material-symbols-outlined" th:if="${rl.isSameUser && !rl.isView}"
@@ -103,7 +103,7 @@
 
             </div>
 
-            <div class="edit">
+            <div class="edit" sec:authorize="isAuthenticated()">
 
               <div class="listBox">
                 <span th:if="${rl.isSameUser}" class="material-symbols-outlined">

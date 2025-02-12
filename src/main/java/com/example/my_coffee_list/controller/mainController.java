@@ -35,15 +35,50 @@ public class mainController {
     this.commentService = commentService;
   }
 
-  // ホーム画面(未ログイン)
-  @GetMapping("home")
-  public String noLoginPage(Model model){
-    List<Recipe> recipeList = 
-    return "home";
-  }
-
-  // ホーム画面(ログイン後)
+  // ホーム画面(レシピをランダムで10件)
   @GetMapping("/")
+  public String homePage(Model model, UserDetailsImpl userDetailsImpl){
+    // ランダムで10件レシピを取得
+    List<Recipe> recipeList = recipeService.getRandomRecipe();
+
+    if(userDetailsImpl.getUser() != null){
+    User user = userDetailsImpl.getUser();
+
+    // view表示用
+    for (Recipe recipe : recipeList) {
+      User recipeUser = recipe.getUser();
+      User favUser = userDetailsImpl.getUser();
+
+      // レシピ作成ユーザーとログインユーザーが同じがチェック(表示切替用)
+      recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
+
+      // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック(お気に入り表示用)
+      Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
+      recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
+
+      // レシピにコメントを付ける
+      List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
+      List<String> commentTexts = commentList.stream().map(Comment::getText).collect(Collectors.toList());
+      recipe.setComment(commentTexts);
+    }
+
+    model.addAttribute("user", user);
+    model.addAttribute("recipeList", recipeList);
+
+   }else{
+    // view表示用
+    for (Recipe recipe : recipeList) {
+      recipe.setSameUser(false);
+      recipe.setFav(false);
+      recipe.setComment(null);
+    }
+    model.addAttribute("recipeList", recipeList);
+   }
+    return "index";
+  }
+  
+  // 自分のレシピの一覧を確認
+  @GetMapping("/myRecipe")
   public String indexPage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Favorite favorite) {
 
     User user = userDetailsImpl.getUser();
@@ -70,7 +105,7 @@ public class mainController {
     model.addAttribute("user", user);
     model.addAttribute("recipeList", recipeList);
 
-    return "index";
+    return "myRecipe";
   }
 
   // ヘッダーの豆検索フォーム→検索結果へ
@@ -98,7 +133,7 @@ public class mainController {
         List<String> commentTexts = commentList.stream().map(Comment::getText).collect(Collectors.toList());
         recipe.setComment(commentTexts);
       }
-      
+
       System.out.println(recipeList);
       model.addAttribute("recipeList", recipeList);
       model.addAttribute("searchName", beanSearch);
