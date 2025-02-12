@@ -13,8 +13,8 @@ a {
 }
 
 img {
-    min-width: 100px;
-    height: 100px;
+    min-width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -25,9 +25,9 @@ img {
     border-radius: 10px;
     width: 70%;
     margin: 30px auto;
-    padding: 20px 50px;
+    padding: 10px 20px;
     background-color: rgba(235, 235, 235, 0.514);
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
 }
 
 /* アイコン・ユーザー名・ブックマーク・通知 */
@@ -63,7 +63,7 @@ img {
 
 .listName {
     flex: 1;
-    margin-left: 50px;
+    margin-left: 30px;
 }
 
 .listName>span {

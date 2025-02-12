@@ -1,9 +1,26 @@
 h2 {
     width: 70%;
-    margin: 50px auto;
-    padding-bottom: 30px;
+    margin: 30px auto 20px auto;
+    padding-bottom: 10px;
     text-align: left;
     border-bottom: #1010102d 1px solid;
+}
+
+.infoHome {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.infoHome>p {
+    width:65%;
+    margin: auto;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.infoInmain {
+    width:68%;
+    margin: auto;
 }
 
 @media (max-width:700px) {
@@ -15,5 +32,14 @@ h2 {
         width: 90%;
         font-size: 18px;
         padding-bottom: 10px;
+    }
+
+    .infoHome>p {
+        width:85%;
+    }
+
+    .infoInmain {
+        width:85%;
+        margin: auto;
     }
 }

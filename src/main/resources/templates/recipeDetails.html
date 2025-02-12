@@ -123,7 +123,7 @@
 
       <div class="border"></div>
 
-      <form id="commentForm" method="post" th:action="@{/Comment/{recipeId}(recipeId=${recipe.id})}">
+      <form id="commentForm" method="post" th:action="@{/Comment/{recipeId}(recipeId=${recipe.id})}" sec:authorize="isAuthenticated()">
         <h5>コメント投稿</h5>
         <textarea name="newComment" required></textarea>
         <button type="submit">投稿</button>

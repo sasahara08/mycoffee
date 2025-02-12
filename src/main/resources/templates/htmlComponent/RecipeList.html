@@ -103,9 +103,9 @@
 
             </div>
 
-            <div class="edit" sec:authorize="isAuthenticated()">
+            <div class="edit">
 
-              <div class="listBox">
+              <div class="listBox" sec:authorize="isAuthenticated()">
                 <span th:if="${rl.isSameUser}" class="material-symbols-outlined">
                   edit_square
                 </span>
@@ -114,7 +114,7 @@
                 </a>
               </div>
 
-              <div class="listBox">
+              <div class="listBox" sec:authorize="isAuthenticated()">
                 <span th:if="${rl.isSameUser}" class="material-symbols-outlined">
                   delete
                 </span>

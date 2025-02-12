@@ -138,14 +138,14 @@ li>img {
   padding-bottom: 0px;
 }
 
-.sub_menu>ul>li>a {
+li>a {
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: relative;
 }
 
-.sub_menu>ul>li>a::after {
+li>a::after {
   position: absolute;
   left: 0px;
   content: "";
@@ -158,7 +158,7 @@ li>img {
   transition: transform 0.3s;
 }
 
-.sub_menu>ul>li>a:hover::after {
+li>a:hover::after {
   transform: scale(1, 1);
 }
 

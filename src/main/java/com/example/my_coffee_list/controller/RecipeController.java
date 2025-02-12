@@ -123,36 +123,39 @@ public class RecipeController {
   // レシピを削除
   @GetMapping("/delete/{recipeId}/{userId}")
   public String getMethodName(@PathVariable("recipeId") Integer recipeId, @PathVariable("userId") Integer userId,
-      @AuthenticationPrincipal UserDetailsImpl userDetailsImpl, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+      @AuthenticationPrincipal UserDetailsImpl userDetailsImpl, HttpServletRequest request,
+      RedirectAttributes redirectAttributes) {
     // レシピを作った本人以外はホームへ遷移(URL直打ち対策)
     if (userId == userDetailsImpl.getUser().getId()) {
       favoriteService.deleteFavoriteForRecipe(recipeId);
       commentService.deleteCommentForRecipe(recipeId);
       recipeService.deleteRecipe(recipeId);
     }
-    //元の画面に遷移
+    // 元の画面に遷移
     String resUrl = request.getHeader("Referer");
     redirectAttributes.addFlashAttribute("message", "レシピを削除しました。");
     return "redirect:" + resUrl;
   }
 
   // レシピの詳細確認（コメントも併せて表示）
-  @GetMapping("/RecipeDetails/{resipeId}")
-  public String recipeDetails(@PathVariable("resipeId") Integer recipeId, Model model,
+  @GetMapping("/RecipeDetails/{recipeId}")
+  public String recipeDetails(@PathVariable("recipeId") Integer recipeId, Model model,
       @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
 
-    User user = userDetailsImpl.getUser();
+    User user = (userDetailsImpl != null) ? userDetailsImpl.getUser() : null;
     Recipe recipe = recipeService.SearchRecipeForId(recipeId);
     List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
 
-    for (Comment comment : commentList) {
-      User commentUser = comment.getUser();
-      comment.setSameUser(commentService.checkCommentUser(commentUser, userDetailsImpl));
+    if (userDetailsImpl != null) {
+      for (Comment comment : commentList) {
+        User commentUser = comment.getUser();
+        comment.setSameUser(commentService.checkCommentUser(commentUser, userDetailsImpl));
+      }
+      recipeService.recipeView(recipe, userDetailsImpl); // レシピ登録者が閲覧することで通知を消す
+      model.addAttribute("commentList", commentList);
     }
 
-    recipeService.recipeView(recipe, userDetailsImpl); //レシピ登録者が閲覧することで通知を消す
     model.addAttribute("recipe", recipe);
-    model.addAttribute("commentList", commentList);
     model.addAttribute("user", user);
 
     return "recipeDetails";

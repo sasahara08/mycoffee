@@ -37,46 +37,48 @@ public class mainController {
 
   // ホーム画面(レシピをランダムで10件)
   @GetMapping("/")
-  public String homePage(Model model, UserDetailsImpl userDetailsImpl){
+  public String homePage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
     // ランダムで10件レシピを取得
     List<Recipe> recipeList = recipeService.getRandomRecipe();
 
-    if(userDetailsImpl.getUser() != null){
-    User user = userDetailsImpl.getUser();
+    if (userDetailsImpl != null) {
+      System.out.println("userあり");
+      User user = userDetailsImpl.getUser();
 
-    // view表示用
-    for (Recipe recipe : recipeList) {
-      User recipeUser = recipe.getUser();
-      User favUser = userDetailsImpl.getUser();
+      // view表示用
+      for (Recipe recipe : recipeList) {
+        User recipeUser = recipe.getUser();
+        User favUser = userDetailsImpl.getUser();
 
-      // レシピ作成ユーザーとログインユーザーが同じがチェック(表示切替用)
-      recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
+        // レシピ作成ユーザーとログインユーザーが同じがチェック(表示切替用)
+        recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
 
-      // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック(お気に入り表示用)
-      Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
-      recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
+        // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック(お気に入り表示用)
+        Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
+        recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
 
-      // レシピにコメントを付ける
-      List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
-      List<String> commentTexts = commentList.stream().map(Comment::getText).collect(Collectors.toList());
-      recipe.setComment(commentTexts);
+        // レシピにコメントを付ける
+        List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
+        List<String> commentTexts = commentList.stream().map(Comment::getText).collect(Collectors.toList());
+        recipe.setComment(commentTexts);
+      }
+
+      model.addAttribute("user", user);
+      model.addAttribute("recipeList", recipeList);
+
+    } else {
+      System.out.println("user無し");
+      // view表示用
+      for (Recipe recipe : recipeList) {
+        recipe.setSameUser(false);
+        recipe.setFav(false);
+        recipe.setComment(null);
+      }
+      model.addAttribute("recipeList", recipeList);
     }
-
-    model.addAttribute("user", user);
-    model.addAttribute("recipeList", recipeList);
-
-   }else{
-    // view表示用
-    for (Recipe recipe : recipeList) {
-      recipe.setSameUser(false);
-      recipe.setFav(false);
-      recipe.setComment(null);
-    }
-    model.addAttribute("recipeList", recipeList);
-   }
     return "index";
   }
-  
+
   // 自分のレシピの一覧を確認
   @GetMapping("/myRecipe")
   public String indexPage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Favorite favorite) {
@@ -115,34 +117,45 @@ public class mainController {
     if (!beanSearch.isEmpty()) {
       Bean bean = beanService.beanSearch(beanSearch);
       List<Recipe> recipeList = recipeService.recipeByBean(bean);
-      User user = userDetailsImpl.getUser();
+      if (userDetailsImpl != null) {
+        User user = userDetailsImpl.getUser();
 
-      for (Recipe recipe : recipeList) {
-        User recipeUser = recipe.getUser();
+        for (Recipe recipe : recipeList) {
+          User recipeUser = recipe.getUser();
 
-        // レシピ作成ユーザーとログインユーザーが同じがチェック
-        recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
+          // レシピ作成ユーザーとログインユーザーが同じがチェック
+          recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
 
-        User favUser = userDetailsImpl.getUser();
-        // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック
-        Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
-        recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
+          User favUser = userDetailsImpl.getUser();
+          // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック
+          Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
+          recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
 
-        // レシピにコメントを付ける
-        List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
-        List<String> commentTexts = commentList.stream().map(Comment::getText).collect(Collectors.toList());
-        recipe.setComment(commentTexts);
+          // レシピにコメントを付ける
+          List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
+          List<String> commentTexts = commentList.stream().map(Comment::getText).collect(Collectors.toList());
+          recipe.setComment(commentTexts);
+        }
+
+        System.out.println(recipeList);
+        model.addAttribute("recipeList", recipeList);
+        model.addAttribute("searchName", beanSearch);
+        model.addAttribute("user", user);
+
+        return "search";
+        
+      } else {
+        for (Recipe recipe : recipeList) {
+          recipe.setSameUser(false);
+          recipe.setFav(false);
+          recipe.setComment(null);
+        }
+        model.addAttribute("recipeList", recipeList);
+        model.addAttribute("searchName", beanSearch);
+        return "search";
       }
-
-      System.out.println(recipeList);
-      model.addAttribute("recipeList", recipeList);
-      model.addAttribute("searchName", beanSearch);
-      model.addAttribute("user", user);
-
-      return "search";
     } else {
-      model.addAttribute("errorMessage", "検索ワードがありません");
-      System.out.println("検索ワードがない為ホームに戻ります。");
+      model.addAttribute("Message", "検索ワードがありません");
       return "redirect:/";
     }
   }
