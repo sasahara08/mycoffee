@@ -35,7 +35,14 @@ public class mainController {
     this.commentService = commentService;
   }
 
-  // ホーム画面
+  // ホーム画面(未ログイン)
+  @GetMapping("home")
+  public String noLoginPage(Model model){
+    List<Recipe> recipeList = 
+    return "home";
+  }
+
+  // ホーム画面(ログイン後)
   @GetMapping("/")
   public String indexPage(Model model, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Favorite favorite) {
 

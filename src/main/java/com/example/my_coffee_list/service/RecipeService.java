@@ -60,6 +60,9 @@ public class RecipeService {
     return recipeRepository.findById(Id).orElse(null);
   }
 
+  // ランダムで１０件レシピを取得
+  public 
+
   // レシピを作成したユーザーとログインしているユーザーが同じかチェック
   public boolean checkUser(User user, UserDetailsImpl userDetailsImpl) {
     return user.getId().equals(userDetailsImpl.getUser().getId());

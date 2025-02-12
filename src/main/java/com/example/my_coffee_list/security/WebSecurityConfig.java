@@ -17,14 +17,14 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((reqests) -> reqests
-                .requestMatchers("/css/**", "/img/**", "/js/**", "/signup/**", "/resetPw/**").permitAll()
+                .requestMatchers("/home", "/css/**", "/img/**", "/js/**", "/signup/**", "/resetPw/**").permitAll()
                 .anyRequest().authenticated()
             )
 
             .formLogin((login) -> login
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/", true)
                 .failureUrl("/login?error")
                 .permitAll()
             )
