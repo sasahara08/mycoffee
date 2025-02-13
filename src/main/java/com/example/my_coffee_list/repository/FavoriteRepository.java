@@ -13,7 +13,7 @@ import java.util.List;
 public interface FavoriteRepository extends JpaRepository<Favorite, Integer> {
   public Boolean existsByUserAndRecipe(User user, Recipe recipe);
   public Favorite findByUserAndRecipe(User user, Recipe recipe);
-  public Optional<Favorite> findByRecipe(Recipe recipe);
+  public Optional<Favorite> findByRecipeAndUser(Recipe recipe, User user);
   public List<Favorite> findByRecipeId(Integer id);
   public List<Favorite> findByUser(User user);
 }

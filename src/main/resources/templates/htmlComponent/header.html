@@ -27,7 +27,7 @@
         </li>
 
         <li class="userIcon" sec:authorize="isAuthenticated()">
-          <img th:src="@{/user_icon/{img}(img=${user.img})}" alt="ユーザーアイコン">
+          <img th:src="@{/user_icon/{img}(img=${user.img})}" alt="ユーザーアイコン" width="40px">
           <div class="sub_menu">
             <ul>
 

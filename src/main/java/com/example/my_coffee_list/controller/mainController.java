@@ -54,8 +54,8 @@ public class mainController {
         recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
 
         // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック(お気に入り表示用)
-        Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
-        recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
+        // Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe, user);
+        recipe.setFav(favoriteService.searchFavRecipe(recipe, favUser));
 
         // レシピにコメントを付ける
         List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
@@ -94,9 +94,9 @@ public class mainController {
       // レシピ作成ユーザーとログインユーザーが同じがチェック
       recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
 
-      // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック
-      Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
-      recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
+      // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック(お気に入り表示用)
+      // Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe, user);
+      recipe.setFav(favoriteService.searchFavRecipe(recipe, favUser));
 
       // レシピにコメントを付ける
       List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
@@ -127,9 +127,9 @@ public class mainController {
           recipe.setSameUser(recipeService.checkUser(recipeUser, userDetailsImpl));
 
           User favUser = userDetailsImpl.getUser();
-          // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック
-          Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
-          recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
+          // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック(お気に入り表示用)
+          // Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe, user);
+          recipe.setFav(favoriteService.searchFavRecipe(recipe, favUser));
 
           // レシピにコメントを付ける
           List<Comment> commentList = commentService.getCommenListforRecipe(recipe);
@@ -143,7 +143,7 @@ public class mainController {
         model.addAttribute("user", user);
 
         return "search";
-        
+
       } else {
         for (Recipe recipe : recipeList) {
           recipe.setSameUser(false);
@@ -178,8 +178,7 @@ public class mainController {
 
       // レシピをお気に入りしているユーザーとログインユーザーが同じがチェック(お気に入り表示切替)
       User favUser = userDetailsImpl.getUser();
-      Favorite searchedFavRecipe = favoriteService.searchFavRecipe(recipe);
-      recipe.setFav(favoriteService.FavStatusForRecipe(searchedFavRecipe, favUser));
+      recipe.setFav(favoriteService.searchFavRecipe(recipe, favUser));
 
       // レシピにコメントを付ける
       List<Comment> commentList = commentService.getCommenListforRecipe(recipe);

@@ -58,7 +58,7 @@ public class RecipeController {
   @PostMapping("/createRecipe")
   public String registRecipe(@ModelAttribute @Validated RecipeForm recipeForm, BindingResult bindingResult,
       HttpServletRequest httpServletRequest, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
-      RedirectAttributes redirectAttributes, Model model) {
+      RedirectAttributes redirectAttributes, Model model,  HttpServletRequest request) {
 
     if (bindingResult.hasErrors()) {
       redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipeForm", bindingResult);
@@ -83,7 +83,7 @@ public class RecipeController {
       RecipeForm recipeForm,
       @AuthenticationPrincipal UserDetailsImpl userDetailsImpl, Model model) {
     // レシピを作った本人以外はホームへ遷移(URL直打ち対策)
-    if (userId == userDetailsImpl.getUser().getId()) {
+    if (userId.equals(userDetailsImpl.getUser().getId())) {
       User user = userDetailsImpl.getUser();
       RecipeForm editRecipe = recipeService.setRecipeToEditFrom(recipeId, recipeForm);
 

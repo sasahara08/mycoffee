@@ -55,16 +55,10 @@ public class FavoriteService {
   }
 
   // レシピ毎にお気に入りされているかチェック
-  public Favorite searchFavRecipe(Recipe recipe) {
-    Favorite searchedFav = favoriteRepository.findByRecipe(recipe).orElse(null);
-    return searchedFav;
+  public boolean searchFavRecipe(Recipe recipe, User user) {
+    Favorite searchedFav = favoriteRepository.findByRecipeAndUser(recipe, user).orElse(null);
+    return searchedFav != null;
   }
-
-  // ユーザーがレシピをお気に入りしているかチェック
-  public boolean FavStatusForRecipe(Favorite favorite, User user) {
-    return favorite != null && favorite.getUser().equals(user);
-}
-
 
   // ユーザーがお気に入りしているレシピを一覧で取得
   public List<Favorite> selectedFavPage(User user) {

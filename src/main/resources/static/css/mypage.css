@@ -46,8 +46,6 @@ button:hover {
 
 .mypageMenu>* {
     margin-bottom: 30px;
-    /* 後で消す */
-    /* border: #1010102d 1px solid; */
 }
 
 .contents {
@@ -65,7 +63,7 @@ button:hover {
     border-bottom: 1px solid #1010102d;
 }
 
-img {
+.iconImg>img {
     justify-self: center;
     min-width: 200px;
     height: 200px;
