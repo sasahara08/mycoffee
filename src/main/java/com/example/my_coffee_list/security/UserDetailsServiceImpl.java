@@ -20,16 +20,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         try {
-            System.out.println("ユーザー情報取得成功");
+            // System.out.println("ユーザー情報取得成功");
             User user = userRepository.findByEmail(email);
             if(user == null){
                 throw new UsernameNotFoundException("ユーザーが見つかりませんでした。");
             }
-            System.out.println("ユーザー情報取得成功");
-            System.out.println(user);
+            // System.out.println("ユーザー情報取得成功");
             return new UserDetailsImpl(user);
         } catch (Exception e) {
-            System.out.println("ユーザー情報取得失敗");
+            // System.out.println("ユーザー情報取得失敗");
             throw new UsernameNotFoundException("ユーザーが見つかりませんでした。");
         }
     }

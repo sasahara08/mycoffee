@@ -42,7 +42,6 @@ public class mainController {
     List<Recipe> recipeList = recipeService.getRandomRecipe();
 
     if (userDetailsImpl != null) {
-      System.out.println("userあり");
       User user = userDetailsImpl.getUser();
 
       // view表示用
@@ -67,7 +66,6 @@ public class mainController {
       model.addAttribute("recipeList", recipeList);
 
     } else {
-      System.out.println("user無し");
       // view表示用
       for (Recipe recipe : recipeList) {
         recipe.setSameUser(false);
@@ -137,7 +135,6 @@ public class mainController {
           recipe.setComment(commentTexts);
         }
 
-        System.out.println(recipeList);
         model.addAttribute("recipeList", recipeList);
         model.addAttribute("searchName", beanSearch);
         model.addAttribute("user", user);

@@ -19,10 +19,8 @@ public class BeanService {
     Bean searchBean = beanRepository.findByName(name);
 
     if (searchBean == null || searchBean.getName().isEmpty()) {
-      System.out.println("null");
       Bean bean = new Bean();
       bean.setName(name);
-      System.out.println(bean);
       beanRepository.save(bean);
       return beanRepository.findByName(name);
     } else {

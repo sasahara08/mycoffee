@@ -127,7 +127,6 @@ public class RecipeService {
   public void recipeView(Recipe recipe, UserDetailsImpl userDetailsImpl) {
 
     if (recipe.getUser().equals(userDetailsImpl.getUser())) {
-      System.out.println("a");
       recipe.setView(false);
       recipeRepository.save(recipe);
     }

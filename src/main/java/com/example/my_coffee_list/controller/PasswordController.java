@@ -66,7 +66,6 @@ public class PasswordController {
         }
 
         User user = userDetailsImpl.getUser();
-        System.out.println(user);
         model.addAttribute("user", user);
 
         return "updataPw";
