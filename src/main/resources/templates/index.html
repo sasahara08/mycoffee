@@ -24,9 +24,9 @@
 <body>
 
   <!-- 遷移時メッセージ -->
-  <div th:replace="~{/htmlComponent/message :: message}"></div>
+  <div th:replace="~{htmlComponent/message :: message}"></div>
 
-  <header th:replace="~{/htmlComponent/header :: header}"></header>
+  <header th:replace="~{htmlComponent/header :: header}"></header>
 
   <main>
 
@@ -41,7 +41,7 @@
     <h2>home</h2>
     <p class="infoInmain">◆ homeでは全レシピからランダムで10件表示します。</p>
 
-    <div class="menu_list" th:replace="~{/htmlComponent/RecipeList :: recipeList}">
+    <div class="menu_list" th:replace="~{htmlComponent/RecipeList :: recipeList}">
 
   </main>
 

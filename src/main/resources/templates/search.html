@@ -24,13 +24,13 @@
 <body>
 
   <!-- headerを挿入 -->
-  <header th:replace="~{/htmlComponent/header :: header}"></header>
+  <header th:replace="~{htmlComponent/header :: header}"></header>
 
   <main>
 
     <h2 th:text="'「' + ${searchName} + '」の検索結果'"></h2>
 
-    <div class="menu_list" th:replace="~{/htmlComponent/RecipeList :: recipeList}">
+    <div class="menu_list" th:replace="~{htmlComponent/RecipeList :: recipeList}">
     </div>
   </main>
 

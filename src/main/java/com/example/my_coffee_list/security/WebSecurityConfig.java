@@ -21,7 +21,7 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated())
 
                 .formLogin((login) -> login
-                        .loginPage("/")
+                        .loginPage("/login")
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/")
                         .failureUrl("/login?error")
