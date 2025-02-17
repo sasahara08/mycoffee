@@ -28,7 +28,7 @@ public class SignupEventListener {
     String token = UUID.randomUUID().toString();
     verificationTokenService.userAuth(user, token);
 
-    String senderAddress = "sasahara.yukio.08@gmail.com";
+    String senderAddress = "yukio.sasahara.08@gmail.com";
     String recipientAddress = user.getEmail();
     String subject = "メール認証";
     String confirmationUrl = signupEvent.getRequestUrl() + "/verify?token=" + token;

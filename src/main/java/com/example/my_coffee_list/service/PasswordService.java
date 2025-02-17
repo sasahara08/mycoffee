@@ -50,7 +50,7 @@ public class PasswordService {
     // 新しいパスワードを送信
     public void sendNewPw(String password, String email, String name) {
 
-        String senderAddress = "sasahara.yukio.08@gmail.com";
+        String senderAddress = "yukio.sasahara.08@gmail.com";
         String recipientAddress = email;
         String subject = "仮パスワード送信のご連絡\n\n";
         String message = "仮パスワードは以下の通りです。\n\n仮パスワードでログイン後、マイメニューにてパスワードの再設定を行ってください。\n";

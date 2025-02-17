@@ -34,7 +34,7 @@
     <div class="menu">
       <form class="iconImg" th:action="@{/changeIcon}" method="post" enctype="multipart/form-data">
         <div class="formHead">
-          <img th:src="@{/user_icon/{img}(img=${user.img})}" id="preview" alt="ユーザーアイコン" width="150">
+          <img th:src="@{/images/{img}(img=${user.img})}" id="preview" alt="ユーザーアイコン" width="150">
           <input name="editImg" id="input_img" type="file" accept="image/jpeg, image/png" required>
         </div>
 

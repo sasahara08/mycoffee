@@ -33,7 +33,7 @@
     <div class="mypageMenu">
 
       <div class="iconImg">
-        <img th:src="@{/user_icon/{img}(img=${user.img})}" id="preview" alt="ユーザーアイコン" width="150" />
+        <img th:src="@{/images/{img}(img=${user.img})}" id="preview" alt="ユーザーアイコン" width="150" />
         <a th:href="@{/changeIcon}"><button>アイコンを更新</button></a>
       </div>
 
