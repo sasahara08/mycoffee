@@ -239,6 +239,10 @@ button:hover {
         font-weight: 600;
     }
 
+    .content>span {
+        font-size: smaller;
+    }
+
     .modal>form {
         width: 80%;
     }
