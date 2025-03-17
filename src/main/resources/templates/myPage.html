@@ -55,7 +55,7 @@
             <button>パスワード再設定</button>
           </a>
           <a th:href="@{/deleteAccount}">
-            <button class="deleteButton">アカウント削除</button>
+            <button class="deleteButton" id="deleteAccount">アカウント削除</button>
           </a>
         </div>
       </div>
@@ -104,6 +104,15 @@
     });
 
 
+  </script>
+
+  <script>
+    function butotnClick() {
+      let check = confirm('アカウントを削除してもよろしいですか');
+    }
+
+    let button = document.getElementById('deleteAccount');
+    button.addEventListener('click', butotnClick);
   </script>
 
   <script>
